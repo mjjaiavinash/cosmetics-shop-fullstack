@@ -2,7 +2,6 @@ services:
   - type: web
     name: cosmetics-backend
     env: node
-    rootDir: ./src
     buildCommand: npm install
     startCommand: node server.cjs
     envVars:
