@@ -16,6 +16,7 @@ const connectDB = async () => {
 const authRoutes = require('./routes/auth');
 const contactRoutes = require('./routes/contact');
 const adminRoutes = require('./routes/admin');
+const orderRoutes = require('./routes/orders');
 
 const app = express();
 
@@ -30,6 +31,7 @@ connectDB();
 app.use('/api/auth', authRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api', orderRoutes);
 
 // Health check
 app.get('/', (req, res) => {

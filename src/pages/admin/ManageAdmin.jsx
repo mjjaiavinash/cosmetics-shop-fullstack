@@ -228,8 +228,8 @@ function ManageAdmin() {
         
         <div className="default-admin-info">
           <h3>ℹ️ Default Admin</h3>
-          <p>Email: <strong>admin@gmail.com</strong></p>
-          <p>Password: <strong>admin@123</strong></p>
+          <p>Username: <strong>admin</strong></p>
+          <p>Password: <strong>admin123</strong></p>
           <p className="note">This is a hardcoded admin that cannot be edited or deleted.</p>
         </div>
       </div>

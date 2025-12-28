@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { useAdmin } from "../context/AdminContext";
 import Navbar from "../components/Navbar";
+import CheckoutModal from "../components/CheckoutModal";
 
 function Products() {
   const { products } = useAdmin();
   const [displayProducts, setDisplayProducts] = useState([]);
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [checkoutProducts, setCheckoutProducts] = useState([]);
+  const [checkoutTotal, setCheckoutTotal] = useState(0);
 
   useEffect(() => {
     setDisplayProducts(products);
@@ -28,6 +32,25 @@ function Products() {
     alert(`${product.name} added to cart!`);
   };
 
+  const buyNow = (product) => {
+    const orderProduct = {
+      productId: product._id || product.id,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+      image: product.image
+    };
+    
+    setCheckoutProducts([orderProduct]);
+    setCheckoutTotal(product.price);
+    setShowCheckout(true);
+  };
+
+  const handleOrderSuccess = () => {
+    // Redirect to home or show success message
+    window.location.href = '/';
+  };
+
   return (
     <>
       <Navbar />
@@ -39,7 +62,10 @@ function Products() {
             <div key={product._id || product.id} className="product">
               <img src={product.image} alt={product.name} />
               <h3>{product.name} - ₹{product.price}</h3>
-              <button className="cart-btn" onClick={() => addToCart(product)}>Add to Cart</button>
+              <div className="product-buttons">
+                <button className="cart-btn" onClick={() => addToCart(product)}>Add to Cart</button>
+                <button className="buy-btn" onClick={() => buyNow(product)}>Buy Now</button>
+              </div>
             </div>
           ))}
         </div>
@@ -52,7 +78,10 @@ function Products() {
             <div key={product._id || product.id} className="product">
               <img src={product.image} alt={product.name} />
               <h3>{product.name} - ₹{product.price}</h3>
-              <button className="cart-btn" onClick={() => addToCart(product)}>Add to Cart</button>
+              <div className="product-buttons">
+                <button className="cart-btn" onClick={() => addToCart(product)}>Add to Cart</button>
+                <button className="buy-btn" onClick={() => buyNow(product)}>Buy Now</button>
+              </div>
             </div>
           ))}
         </div>
@@ -65,7 +94,10 @@ function Products() {
             <div key={product._id || product.id} className="product">
               <img src={product.image} alt={product.name} />
               <h3>{product.name} - ₹{product.price}</h3>
-              <button className="cart-btn" onClick={() => addToCart(product)}>Add to Cart</button>
+              <div className="product-buttons">
+                <button className="cart-btn" onClick={() => addToCart(product)}>Add to Cart</button>
+                <button className="buy-btn" onClick={() => buyNow(product)}>Buy Now</button>
+              </div>
             </div>
           ))}
         </div>
@@ -78,11 +110,22 @@ function Products() {
             <div key={product._id || product.id} className="product">
               <img src={product.image} alt={product.name} />
               <h3>{product.name} - ₹{product.price}</h3>
-              <button className="cart-btn" onClick={() => addToCart(product)}>Add to Cart</button>
+              <div className="product-buttons">
+                <button className="cart-btn" onClick={() => addToCart(product)}>Add to Cart</button>
+                <button className="buy-btn" onClick={() => buyNow(product)}>Buy Now</button>
+              </div>
             </div>
           ))}
         </div>
       </section>
+
+      <CheckoutModal 
+        isOpen={showCheckout}
+        onClose={() => setShowCheckout(false)}
+        products={checkoutProducts}
+        totalAmount={checkoutTotal}
+        onSuccess={handleOrderSuccess}
+      />
 
       <footer>
         <p>© 2025 Cosmetics Store. All Rights Reserved.</p>

@@ -34,7 +34,7 @@ function AdminLogin() {
           <form onSubmit={handleLogin}>
             <input
               type="text"
-              placeholder="Email"
+              placeholder="Username"
               value={credentials.username}
               onChange={(e) => setCredentials({...credentials, username: e.target.value})}
               required

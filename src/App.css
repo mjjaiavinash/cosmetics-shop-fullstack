@@ -1242,6 +1242,99 @@ footer {
 .checkout-btn:hover {
   background-color: #333;
 }
+
+/* Product buttons container */
+.product-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.buy-btn {
+  background-color: #ff6b35;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.buy-btn:hover {
+  background-color: #e55a2b;
+}
+
+/* Checkout Modal Styles */
+.checkout-modal {
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.order-summary {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.order-summary h3 {
+  margin: 0 0 15px 0;
+  color: #2c3e50;
+}
+
+.checkout-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.checkout-total {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 2px solid #ddd;
+  font-size: 18px;
+}
+
+.checkout-modal input,
+.checkout-modal textarea,
+.checkout-modal select {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.checkout-modal textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.place-order-btn {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.place-order-btn:hover {
+  background: #229954;
+}
+
+.place-order-btn:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+}
 @media (min-width: 769px) {
   body:has(.auth-layout) {
     overflow: hidden;

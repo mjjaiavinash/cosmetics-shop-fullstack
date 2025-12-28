@@ -13,8 +13,7 @@ router.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     // Check hardcoded admin first
-    if ((username === 'admin' && password === 'admin123') || 
-        (username === 'admin@gmail.com' && password === 'admin@123')) {
+    if (username === 'admin' && password === 'admin123') {
       return res.json({
         success: true,
         message: 'Admin login successful'

@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
+import CheckoutModal from "../components/CheckoutModal";
 import { Link } from "react-router-dom";
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
+  const [showCheckout, setShowCheckout] = useState(false);
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -30,6 +32,33 @@ function Cart() {
     updatedCart[index].quantity = newQuantity;
     setCartItems(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
+  const proceedToCheckout = () => {
+    if (cartItems.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
+    setShowCheckout(true);
+  };
+
+  const handleOrderSuccess = () => {
+    // Clear cart after successful order
+    setCartItems([]);
+    localStorage.removeItem('cart');
+    setShowCheckout(false);
+    alert('Order placed successfully!');
+    window.location.href = '/';
+  };
+
+  const formatCartForCheckout = () => {
+    return cartItems.map(item => ({
+      productId: item._id || item.id,
+      name: item.name,
+      price: item.price,
+      quantity: item.quantity || 1,
+      image: item.image
+    }));
   };
 
   return (
@@ -84,10 +113,18 @@ function Cart() {
 
             <div className="cart-summary">
               <h3>Total: ₹{getTotalPrice()}</h3>
-              <button className="checkout-btn">Proceed to Checkout</button>
+              <button className="checkout-btn" onClick={proceedToCheckout}>Proceed to Checkout</button>
             </div>
           </>
         )}
+        
+        <CheckoutModal 
+          isOpen={showCheckout}
+          onClose={() => setShowCheckout(false)}
+          products={formatCartForCheckout()}
+          totalAmount={getTotalPrice()}
+          onSuccess={handleOrderSuccess}
+        />
       </section>
 
       <footer>
