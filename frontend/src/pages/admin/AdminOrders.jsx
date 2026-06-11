@@ -34,11 +34,11 @@ function AdminOrders() {
                 </tr>
               ) : (
                 orders.map(order => (
-                  <tr key={order.id}>
-                    <td>#{order.id}</td>
+                  <tr key={order._id}>
+                    <td>#{order._id?.slice(-6)}</td>
                     <td>{order.customerName}</td>
-                    <td>{new Date(order.date).toLocaleDateString()}</td>
-                    <td>₹{order.total}</td>
+                    <td>{new Date(order.orderDate).toLocaleDateString()}</td>
+                    <td>₹{order.totalAmount}</td>
                     <td>
                       <span className={`status ${order.status}`}>
                         {order.status}
@@ -47,7 +47,7 @@ function AdminOrders() {
                     <td>
                       <select 
                         value={order.status} 
-                        onChange={(e) => handleStatusChange(order.id, e.target.value)}
+                        onChange={(e) => handleStatusChange(order._id, e.target.value)}
                       >
                         <option value="pending">Pending</option>
                         <option value="processing">Processing</option>

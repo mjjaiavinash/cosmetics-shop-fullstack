@@ -194,4 +194,29 @@ router.delete('/admins/:id', async (req, res) => {
   }
 });
 
+// Get all orders (for admin)
+router.get('/orders', async (req, res) => {
+  try {
+    const orders = await Order.find().sort({ orderDate: -1 });
+    res.json({ success: true, orders });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// Update order status
+router.put('/orders/:id', async (req, res) => {
+  try {
+    const order = await Order.findByIdAndUpdate(
+      req.params.id,
+      { status: req.body.status },
+      { new: true }
+    );
+    if (!order) return res.status(404).json({ success: false, message: 'Order not found' });
+    res.json({ success: true, order });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 module.exports = router;

@@ -4,7 +4,7 @@ import AdminLayout from '../../components/admin/AdminLayout';
 function AdminDashboard() {
   const { products, orders, customers, offers } = useAdmin();
 
-  const totalSales = orders.reduce((sum, order) => sum + (order.total || 0), 0);
+  const totalSales = orders.reduce((sum, order) => sum + (order.totalAmount || 0), 0);
   const lowStockProducts = products.filter(p => (p.stock || 0) < 10);
   const pendingOrders = orders.filter(o => o.status === 'pending').length;
 
@@ -41,7 +41,7 @@ function AdminDashboard() {
             {lowStockProducts.length > 0 ? (
               <div className="alert-list">
                 {lowStockProducts.map(product => (
-                  <div key={product.id} className="alert-item">
+                  <div key={product._id} className="alert-item">
                     {product.name} - Stock: {product.stock || 0}
                   </div>
                 ))}
@@ -61,9 +61,9 @@ function AdminDashboard() {
           <h3>Recent Orders</h3>
           <div className="activity-list">
             {orders.slice(0, 5).map(order => (
-              <div key={order.id} className="activity-item">
-                <span>Order #{order.id}</span>
-                <span>₹{order.total}</span>
+              <div key={order._id} className="activity-item">
+                <span>Order #{order._id?.slice(-6)}</span>
+                <span>₹{order.totalAmount}</span>
                 <span className={`status ${order.status}`}>{order.status}</span>
               </div>
             ))}

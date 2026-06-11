@@ -32,24 +32,15 @@ export const AdminProvider = ({ children }) => {
 
   const loadData = async () => {
     try {
-      const [productsRes, customersRes] = await Promise.all([
+      const [productsRes, customersRes, ordersRes] = await Promise.all([
         adminAuth.getProducts(),
-        adminAuth.getCustomers()
+        adminAuth.getCustomers(),
+        adminAuth.getOrders()
       ]);
       
       setProducts(productsRes.products || []);
       setCustomers(customersRes.customers || []);
-      
-      // Set categories
-      setCategories([
-        { id: 1, name: 'Skincare', subcategories: ['Face Cream', 'Serum', 'Moisturizer', 'Sunscreen'] },
-        { id: 2, name: 'Makeup', subcategories: ['Foundation', 'Mascara', 'Lipstick', 'Eyeliner'] },
-        { id: 3, name: 'Haircare', subcategories: ['Shampoo', 'Conditioner', 'Hair Oil', 'Hair Mask'] },
-        { id: 4, name: 'Perfume', subcategories: ['Floral', 'Citrus', 'Woody', 'Fresh'] }
-      ]);
-      
-      // Remove orders - set empty array
-      setOrders([]);
+      setOrders(ordersRes.orders || []);
       setOffers([]);
       setSettings({
         storeName: 'Cosmetics Store',
@@ -118,10 +109,13 @@ export const AdminProvider = ({ children }) => {
     localStorage.setItem('categories', JSON.stringify(updatedCategories));
   };
 
-  const updateOrderStatus = (id, status) => {
-    const updatedOrders = orders.map(o => o.id === id ? { ...o, status } : o);
-    setOrders(updatedOrders);
-    localStorage.setItem('orders', JSON.stringify(updatedOrders));
+  const updateOrderStatus = async (id, status) => {
+    try {
+      await adminAuth.updateOrderStatus(id, status);
+      setOrders(prev => prev.map(o => (o._id === id ? { ...o, status } : o)));
+    } catch (error) {
+      console.error('Failed to update order status:', error);
+    }
   };
 
   const addOffer = (offer) => {

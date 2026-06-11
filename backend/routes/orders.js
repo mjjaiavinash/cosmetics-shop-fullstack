@@ -2,8 +2,16 @@ const express = require('express');
 const Order = require('../models/Order');
 const router = express.Router();
 
-// Place order
+// Place order - support both /place-order and /
+router.post('/', async (req, res) => {
+  return placeOrder(req, res);
+});
+
 router.post('/place-order', async (req, res) => {
+  return placeOrder(req, res);
+});
+
+async function placeOrder(req, res) {
   try {
     const { customerName, phone, address, products, totalAmount, paymentMethod } = req.body;
     
@@ -24,7 +32,7 @@ router.post('/place-order', async (req, res) => {
 });
 
 // Get all orders
-router.get('/orders', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const orders = await Order.find().sort({ orderDate: -1 });
     res.json({ success: true, orders });

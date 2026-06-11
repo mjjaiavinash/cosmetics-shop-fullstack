@@ -110,6 +110,24 @@ export const adminAuth = {
     }
   },
 
+  getOrders: async () => {
+    try {
+      const response = await api.get('/orders');
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || { success: false, message: 'Network error' };
+    }
+  },
+
+  updateOrderStatus: async (id, status) => {
+    try {
+      const response = await api.put(`/orders/${id}`, { status });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || { success: false, message: 'Network error' };
+    }
+  },
+
   deleteAdmin: async (id) => {
     try {
       const response = await api.delete(`/admins/${id}`);
