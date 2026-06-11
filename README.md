@@ -1,10 +1,10 @@
-# 💄 Cosmetics Management System
+# Cosmetics Management System
 
 A full-stack MERN e-commerce web application for browsing, purchasing, and managing premium beauty products including Skincare, Makeup, Haircare, and Perfume.
 
 ---
 
-## 🚀 Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -18,34 +18,34 @@ A full-stack MERN e-commerce web application for browsing, purchasing, and manag
 
 ---
 
-## ✨ Features
+## Features
 
-### 👤 User Side
-- 🏠 Home page with hero section, trending products, categories, customer reviews & newsletter
-- 🛍️ Product listing with category filters — Skincare, Makeup, Haircare, Perfume
-- 🛒 Add to Cart with quantity management (stored in localStorage)
-- ⚡ Buy Now with instant checkout modal
-- 📦 Order placement with customer name, phone, address & payment method
-- 🔐 User Signup & Login with password hashing
-- 🔑 Forgot / Reset Password
-- 📬 Contact form submission
-- ℹ️ About & Privacy Policy pages
+### User Side
+- Home page with hero section, trending products, categories, customer reviews & newsletter
+- Product listing with category filters — Skincare, Makeup, Haircare, Perfume
+- Add to Cart with quantity management (stored in localStorage)
+- Buy Now with instant checkout modal
+- Order placement with customer name, phone, address & payment method
+- User Signup & Login with password hashing
+- Forgot / Reset Password
+- Contact form submission
+- About & Privacy Policy pages
 
-### 🔧 Admin Side
-- 🔐 Admin Login (default: `admin` / `admin123` or DB admins)
-- 📊 Dashboard with total sales, orders, products, customers, low stock alerts & recent orders
-- 📦 Product Management — Add, Edit, Delete products
-- 🗂️ Category Management
-- 🧾 Order Management — View all orders with status
-- 👥 Customer Management — View all registered users
-- 🎁 Offers Management
-- ⚙️ Admin Settings
-- 👨‍💼 Manage Admins — Add, Edit, Delete admin accounts
-- 🔒 Protected Routes — Admin pages are secured
+### Admin Side
+- Admin Login (default: `admin` / `admin123` or DB admins)
+- Dashboard with total sales, orders, products, customers, low stock alerts & recent orders
+- Product Management — Add, Edit, Delete products
+- Category Management
+- Order Management — View all orders with status
+- Customer Management — View all registered users
+- Offers Management
+- Admin Settings
+- Manage Admins — Add, Edit, Delete admin accounts
+- Protected Routes — Admin pages are secured
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 myapp/
@@ -113,7 +113,7 @@ myapp/
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### Auth — `/api/auth`
 | Method | Endpoint | Description |
@@ -150,7 +150,7 @@ myapp/
 
 ---
 
-## ⚙️ Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js v22.12.0+
@@ -190,7 +190,7 @@ npm run dev
 
 ---
 
-## 🔑 Environment Variables
+## Environment Variables
 
 ### `backend/.env`
 
@@ -208,7 +208,7 @@ VITE_API_URL=http://localhost:5000
 
 ---
 
-## 🗺️ Application Routes
+## Application Routes
 
 ### User Routes
 | Route | Page |
@@ -237,18 +237,18 @@ VITE_API_URL=http://localhost:5000
 
 ---
 
-## 🔐 Default Admin Credentials
+## Default Admin Credentials
 
 ```
 Username: admin
 Password: admin123
 ```
 
-> ⚠️ Change the default credentials before deploying to production.
+> Change the default credentials before deploying to production.
 
 ---
 
-## 📦 Product Categories
+## Product Categories
 
 | Category | Examples |
 |----------|----------|
@@ -259,7 +259,7 @@ Password: admin123
 
 ---
 
-## 🛠️ Available Scripts
+## Available Scripts
 
 ### Frontend
 ```bash
@@ -277,6 +277,6 @@ npm run dev       # Start with nodemon (auto-restart)
 
 ---
 
-## 📄 License
+## License
 
 © 2025 Cosmetics Store. All Rights Reserved.
