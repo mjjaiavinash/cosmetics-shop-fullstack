@@ -30,3 +30,6 @@ backend.env
 
 # Vite cache
 .vite
+
+# VS Code
+.vscode/
