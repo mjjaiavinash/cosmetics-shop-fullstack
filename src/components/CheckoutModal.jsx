@@ -5,6 +5,7 @@ import { API_BASE_URL } from '../config/api';
 function CheckoutModal({ isOpen, onClose, products, totalAmount, onSuccess }) {
   const [formData, setFormData] = useState({
     customerName: '',
+    email: '',
     phone: '',
     address: '',
     paymentMethod: 'cod'
@@ -22,13 +23,13 @@ function CheckoutModal({ isOpen, onClose, products, totalAmount, onSuccess }) {
         totalAmount
       };
 
-      const response = await axios.post(`${API_BASE_URL}/api/place-order`, orderData);
+      const response = await axios.post(`${API_BASE_URL}/api/orders`, orderData);
       
       if (response.data.success) {
         alert('Order placed successfully!');
         onSuccess();
         onClose();
-        setFormData({ customerName: '', phone: '', address: '', paymentMethod: 'cod' });
+        setFormData({ customerName: '', email: '', phone: '', address: '', paymentMethod: 'cod' });
       }
     } catch (error) {
       alert('Failed to place order. Please try again.');
@@ -64,6 +65,14 @@ function CheckoutModal({ isOpen, onClose, products, totalAmount, onSuccess }) {
             placeholder="Full Name"
             value={formData.customerName}
             onChange={(e) => setFormData({...formData, customerName: e.target.value})}
+            required
+          />
+          
+          <input
+            type="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={(e) => setFormData({...formData, email: e.target.value})}
             required
           />
           

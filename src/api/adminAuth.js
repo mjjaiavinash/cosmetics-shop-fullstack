@@ -120,4 +120,36 @@ export const adminAuth = {
   }
 };
 
+// Order and Cart API
+export const orderAPI = {
+  placeOrder: async (orderData) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/api/orders`, orderData);
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || { success: false, message: 'Network error' };
+    }
+  }
+};
+
+export const cartAPI = {
+  addToCart: async (cartData) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/api/cart/add`, cartData);
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || { success: false, message: 'Network error' };
+    }
+  },
+  
+  getCart: async (sessionId) => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/api/cart/${sessionId}`);
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || { success: false, message: 'Network error' };
+    }
+  }
+};
+
 export default api;

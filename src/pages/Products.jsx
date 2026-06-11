@@ -14,22 +14,53 @@ function Products() {
     setDisplayProducts(products);
   }, [products]);
 
-  const addToCart = (product) => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    
-    // Check if product already exists in cart
-    const existingItem = cart.find(item => item.id === product.id);
-    
-    if (existingItem) {
-      // If exists, increase quantity
-      existingItem.quantity = (existingItem.quantity || 1) + 1;
-    } else {
-      // If new, add with quantity 1
-      cart.push({ ...product, quantity: 1 });
+  const addToCart = async (product) => {
+    try {
+      // Generate a session ID if not exists
+      let sessionId = localStorage.getItem('sessionId');
+      if (!sessionId) {
+        sessionId = 'user_' + Date.now();
+        localStorage.setItem('sessionId', sessionId);
+      }
+
+      const cartData = {
+        sessionId,
+        productId: product._id || product.id,
+        name: product.name,
+        price: product.price,
+        quantity: 1
+      };
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/cart/add`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(cartData)
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        alert(`${product.name} added to cart!`);
+      } else {
+        throw new Error(result.message);
+      }
+    } catch (error) {
+      console.error('Cart error:', error);
+      // Fallback to localStorage
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const existingItem = cart.find(item => item.id === product.id);
+      
+      if (existingItem) {
+        existingItem.quantity = (existingItem.quantity || 1) + 1;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+      
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${product.name} added to cart!`);
     }
-    
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert(`${product.name} added to cart!`);
   };
 
   const buyNow = (product) => {

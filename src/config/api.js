@@ -1,1 +1,1 @@
-export const API_BASE_URL = 'https://cosmetic-backend-nymo.onrender.com';
+export const API_BASE_URL = 'https://commerce-backend-1rbc.onrender.com';
