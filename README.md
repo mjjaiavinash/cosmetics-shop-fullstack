@@ -2,6 +2,10 @@
 
 A full-stack MERN e-commerce web application for browsing, purchasing, and managing premium beauty products including Skincare, Makeup, Haircare, and Perfume.
 
+**Live Demo:** https://jaicosmeticsproject.netlify.app/
+
+**Backend API:** https://commerce-backend-1rbc.onrender.com
+
 ---
 
 ## Tech Stack
