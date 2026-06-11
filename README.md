@@ -4,8 +4,6 @@ A full-stack MERN e-commerce web application for browsing, purchasing, and manag
 
 **Live Demo:** https://jaicosmeticsproject.netlify.app/
 
-**Backend API:** https://commerce-backend-1rbc.onrender.com
-
 ---
 
 ## Tech Stack
